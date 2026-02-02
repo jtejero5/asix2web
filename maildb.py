@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
-import database  # Asegúrate de tener database.py en la misma carpeta
+import database
 
 app = Flask(__name__)
 
-# Inicializar la base de datos
+# Inicializar la base de datos al iniciar
 database.init_db()
 
 @app.route('/')
@@ -37,7 +37,7 @@ def getmail():
 @app.route('/addmail', methods=['GET', 'POST'])
 def addmail():
     mensaje = None
-    tipo_mensaje = ""
+    tipo_mensaje = ""  # success o error
     datos_form = {"nombre": "", "email": ""}
     
     if request.method == 'POST':
@@ -51,6 +51,7 @@ def addmail():
             mensaje = mensaje_db
             tipo_mensaje = "success" if exito else "error"
             
+            # Si se agregó correctamente, limpiar el formulario
             if exito:
                 datos_form = {"nombre": "", "email": ""}
         else:

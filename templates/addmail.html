@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Correo{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Agregar Nuevo Correo</h2>
+    
+    <form method="POST" action="{{ url_for('addmail') }}">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" 
+                   value="{{ datos_form.nombre }}" 
+                   placeholder="Introduce el nombre" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" 
+                   value="{{ datos_form.email }}" 
+                   placeholder="Introduce el email" required>
+        </div>
+        
+        <button type="submit" class="btn">Agregar</button>
+    </form>
+    
+    {% if mensaje %}
+    <div class="result {{ tipo_mensaje }}">
+        <h3>Resultado:</h3>
+        <p>{{ mensaje }}</p>
+    </div>
+    {% endif %}
+    
+    <div class="links">
+        <a href="{{ url_for('getmail') }}" class="link-btn">
+            Ir a Buscar Correo
+        </a>
+    </div>
+</div>
+{% endblock %}
